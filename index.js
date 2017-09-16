@@ -1,6 +1,5 @@
 'use strict'
 
-const letsencrypt = require('letsencrypt-express')
 const express = require('express')
 const bodyParser = require('body-parser')
 const corser = require('corser')
@@ -13,15 +12,20 @@ const db = require('./db')
 
 const app = express()
 
-letsencrypt
-.create({
-	server: 'https://acme-v01.api.letsencrypt.org/directory',
-	agreeTos: true,
-	email: process.env.EMAIL,
-	approveDomains: ['cyclehack-2017-lora-backend.jannisr.de'],
-	app
-})
-.listen(process.env.HTTP_PORT || 80, process.env.HTTPS_PORT || 443)
+if (process.env.NODE_ENV === 'production') {
+	const letsencrypt = require('letsencrypt-express')
+	letsencrypt
+		.create({
+			server: 'https://acme-v01.api.letsencrypt.org/directory',
+			agreeTos: true,
+			email: process.env.EMAIL,
+			approveDomains: ['cyclehack-2017-lora-backend.jannisr.de'],
+			app
+		})
+		.listen(80, 443)
+} else {
+	app.listen(3000)
+}
 
 app.use(corser.create())
 app.use(bodyParser.json())
