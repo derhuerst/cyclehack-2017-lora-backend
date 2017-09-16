@@ -38,9 +38,8 @@ app.post('/measurements', (req, res, next) => {
 		req.body.dev_id,
 		timestamp
 	].join('-')
-	const val = JSON.stringify(req.body)
 
-	db.put(key, val, (err) => {
+	db.put(key, req.body, (err) => {
 		if (err) res.status(500).send(err.message)
 		else res.status(201).send('stored')
 	})
