@@ -1,0 +1,35 @@
+{
+	"name": "cyclehack-2017-lora-backend",
+	"description": "todo-description",
+	"version": "0.1.0",
+	"main": "index.js",
+	"files": [
+		"index.js"
+	],
+	"keywords": [
+		"todo"
+	],
+	"author": "Jannis R <mail@jannisr.de>",
+	"homepage": "https://github.com/derhuerst/cyclehack-2017-lora-backend",
+	"repository": "derhuerst/cyclehack-2017-lora-backend",
+	"bugs": "https://github.com/derhuerst/cyclehack-2017-lora-backend/issues",
+	"license": "ISC",
+	"engines": {
+		"node": ">=6"
+	},
+	"dependencies": {
+		"body-parser": "^1.18.1",
+		"corser": "^2.0.1",
+		"express": "^4.15.4",
+		"express-bearer-token": "^2.1.0",
+		"level": "^1.7.0"
+	},
+	"devDependencies": {
+		"tape": "^4.6.3",
+		"tap-min": "^1.2.1"
+	},
+	"scripts": {
+		"test": "node test.js | tap-min",
+		"prepublishOnly": "npm test"
+	}
+}
