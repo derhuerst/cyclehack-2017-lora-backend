@@ -12,8 +12,8 @@ const app = express()
 
 letsencrypt
 .create({
-	server: 'staging',
-	agreeTos: true.
+	server: 'https://acme-v01.api.letsencrypt.org/directory',
+	agreeTos: true,
 	email: process.env.EMAIL,
 	approveDomains: ['cyclehack-2017-lora-backend.jannisr.de'],
 	app
