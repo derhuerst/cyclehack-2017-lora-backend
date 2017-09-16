@@ -13,15 +13,15 @@ const db = require('./db')
 
 const app = express()
 
-// letsencrypt
-// .create({
-// 	server: 'https://acme-v01.api.letsencrypt.org/directory',
-// 	agreeTos: true,
-// 	email: process.env.EMAIL,
-// 	approveDomains: ['cyclehack-2017-lora-backend.jannisr.de'],
-// 	app
-// })
-// .listen(process.env.HTTP_PORT || 80, process.env.HTTPS_PORT || 443)
+letsencrypt
+.create({
+	server: 'https://acme-v01.api.letsencrypt.org/directory',
+	agreeTos: true,
+	email: process.env.EMAIL,
+	approveDomains: ['cyclehack-2017-lora-backend.jannisr.de'],
+	app
+})
+.listen(process.env.HTTP_PORT || 80, process.env.HTTPS_PORT || 443)
 
 app.use(corser.create())
 app.use(bodyParser.json())
@@ -67,5 +67,3 @@ app.get('/measurements/all', (req, res, next) => {
 app.use((err, req, res, next) => {
 	res.status(err.output.statusCode || 500).send(err.message || 'Unknown error')
 })
-
-app.listen(process.env.HTTP_PORT || 80)
