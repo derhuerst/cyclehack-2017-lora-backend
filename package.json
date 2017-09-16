@@ -20,6 +20,7 @@
 		"corser": "^2.0.1",
 		"express": "^4.15.4",
 		"express-bearer-token": "^2.1.0",
+		"letsencrypt-express": "^2.0.6",
 		"level": "^1.7.0",
 		"package.json": "^2.0.1"
 	},

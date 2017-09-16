@@ -1,5 +1,6 @@
 'use strict'
 
+const letsencrypt = require('letsencrypt-express')
 const express = require('express')
 const bodyParser = require('body-parser')
 const corser = require('corser')
@@ -8,6 +9,16 @@ const boom = require('boom')
 const db = require('./db')
 
 const app = express()
+
+letsencrypt
+.create({
+	server: 'staging',
+	agreeTos: true.
+	email: process.env.EMAIL,
+	approveDomains: ['cyclehack-2017-lora-backend.jannisr.de'],
+	app
+})
+.listen(80, 443)
 
 app.use(corser.create())
 app.use(bodyParser.json())
@@ -35,5 +46,3 @@ app.post('/measurements', (req, res, next) => {
 app.use((err, req, res, next) => {
 	res.status(err.output.statusCode || 500).send(err.message || 'Unknown error')
 })
-
-app.listen(3000)
