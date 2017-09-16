@@ -53,7 +53,7 @@ app.get('/measurements', (req, res, next) => {
 	db.createValueStream({limit: 100})
 	.pipe(sink.object())
 	.then((vals) => {
-		res.json(vals)
+		res.send(vals)
 	})
 	.catch(next)
 })
