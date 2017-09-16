@@ -3,9 +3,6 @@
 	"description": "todo-description",
 	"version": "0.1.0",
 	"main": "index.js",
-	"files": [
-		"index.js"
-	],
 	"keywords": [
 		"todo"
 	],
@@ -26,12 +23,7 @@
 		"level": "^1.7.0",
 		"package.json": "^2.0.1"
 	},
-	"devDependencies": {
-		"tape": "^4.6.3",
-		"tap-min": "^1.2.1"
-	},
 	"scripts": {
-		"test": "node test.js | tap-min",
-		"prepublishOnly": "npm test"
+		"start": "node index.js"
 	}
 }
