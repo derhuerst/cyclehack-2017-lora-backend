@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+oldrev=$1
+newrev=$2
+
+npm i --production
+forever restart lora-backend
