@@ -7,6 +7,7 @@ const boom = require('boom')
 const ndjson = require('ndjson')
 const pump = require('pump')
 const sink = require('stream-sink')
+const pick = require('lodash/pick')
 
 const db = require('./db')
 
@@ -30,20 +31,35 @@ if (process.env.NODE_ENV === 'production') {
 app.use(corser.create())
 app.use(bodyParser.json())
 
+const parseTime = (val) => {
+	return Math.round(new Date(val) / 1000)
+}
+
 app.post('/measurements', (req, res, next) => {
 	if (! req.body.metadata) {
 		next(boom.badRequest('regpsifjwofij is missing'))
 		return
 	}
 
-	const timestamp = Math.round(new Date(req.body.metadata.time) / 1000)
+	const timestamp = parseTime(req.body.metadata.time)
 	const key = [
 		req.body.app_id,
 		req.body.dev_id,
 		timestamp
 	].join('-')
 
-	db.put(key, req.body, (err) => {
+	const val = Object.assign(
+		pick(req.body, ['app_id', 'dev_id']),
+		{
+			latitude: req.body.payload_fields.latitude,
+			longitude: req.body.payload_fields.longitude,
+			pm10: req.body.payload_fields.pm10,
+			pm25: req.body.payload_fields.pm25,
+			timestamp: parseTime(req.body.metadata.time),
+		}
+	)
+
+	db.put(key, val, (err) => {
 		if (err) res.status(500).send(err.message)
 		else res.status(201).send('stored')
 	})
