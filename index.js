@@ -66,10 +66,10 @@ app.post('/measurements', (req, res, next) => {
 })
 
 app.get('/measurements', (req, res, next) => {
-	db.createValueStream({limit: 100})
+	db.createValueStream({limit: 100, reverse: true})
 	.pipe(sink.object())
 	.then((vals) => {
-		res.send(vals)
+		res.send(vals.reverse())
 	})
 	.catch(next)
 })
