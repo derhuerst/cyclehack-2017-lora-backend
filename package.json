@@ -1,10 +1,19 @@
 {
+	"private": true,
 	"name": "cyclehack-2017-lora-backend",
-	"description": "todo-description",
+	"description": "Collecting realtime fine dust data sent by a mobile sensor.",
 	"version": "0.1.0",
 	"main": "index.js",
 	"keywords": [
-		"todo"
+		"cyclehack",
+		"bicycle",
+		"cycling",
+		"bike",
+		"fine dust",
+		"pm10",
+		"pm25",
+		"lora",
+		"lorawan"
 	],
 	"author": "Jannis R <mail@jannisr.de>",
 	"homepage": "https://github.com/derhuerst/cyclehack-2017-lora-backend",
